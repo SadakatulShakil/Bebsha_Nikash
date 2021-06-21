@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/back"
+    tools:context=".View.Fragment.AccountingFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarLayLayout"
+        android:layout_width="match_parent"
+        android:background="@color/color_primary"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/shopName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="নগদ হিসাব"
+            android:textColor="@color/black"
+            android:fontFamily="@font/mukti"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            android:letterSpacing=".1" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbarLayLayout">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/primaryLay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/sellCash"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawablePadding="16dp"
+                        android:padding="10dp"
+                        android:layout_margin="5dp"
+                        android:drawableLeft="@drawable/becha"
+                        android:textColor="@color/black"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:background="@drawable/background_card"
+                        android:text="বেচা"/>
+
+                    <TextView
+                        android:id="@+id/buyCash"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawablePadding="16dp"
+                        android:padding="10dp"
+                        android:layout_margin="5dp"
+                        android:drawableLeft="@drawable/kena"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:background="@drawable/background_card_black"
+                        android:text="কেনা"/>
+
+                    <TextView
+                        android:id="@+id/expenseCash"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawablePadding="16dp"
+                        android:padding="10dp"
+                        android:layout_margin="5dp"
+                        android:drawableLeft="@drawable/khoroch"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:background="@drawable/background_card_black"
+                        android:text="খরচ"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/demoSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/primaryLay"
+                    android:layout_marginLeft="20dp"
+                    android:drawablePadding="5dp"
+                    android:drawableRight="@drawable/down_arrow"
+                    android:text="পণ্য বাছাই করুন"/>
+
+                <Spinner
+                    android:id="@+id/selectProductSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="22dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_below="@+id/demoSpinner"
+                    android:background="@drawable/background_button"/>
+
+                <TextView
+                    android:id="@+id/dateFieldText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="১৭ জুন, ২০২১"
+                    android:drawableLeft="@drawable/calendar"
+                    android:drawablePadding="8dp"
+                    android:textColorHint="@color/black"
+                    android:padding="12dp"
+                    android:layout_alignParentLeft="true"
+                    android:fontFamily="@font/mukti"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="5dp"
+                    android:letterSpacing=".05"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:layout_below="@+id/selectProductSpinner"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:background="@drawable/search_background"/>
+
+                <TextView
+                    android:id="@+id/photoField"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="ছবি"
+                    android:clickable="true"
+                    android:drawableLeft="@drawable/camera"
+                    android:drawablePadding="8dp"
+                    android:textColorHint="@color/black"
+                    android:padding="12dp"
+                    android:layout_alignParentRight="true"
+                    android:fontFamily="@font/mukti"
+                    android:layout_marginRight="16dp"
+                    android:letterSpacing=".05"
+                    android:layout_weight="1"
+                    android:layout_below="@+id/selectProductSpinner"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:background="@drawable/search_background"/>
+
+
+                <EditText
+                    android:id="@+id/buyAndSellMoney"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="পেলাম"
+                    android:drawableLeft="@drawable/expense"
+                    android:layout_margin="16dp"
+                    android:padding="12dp"
+                    android:layout_below="@+id/dateFieldText"
+                    android:inputType="number"
+                    android:fontFamily="@font/mukti"
+                    android:textColor="@color/black"
+                    android:letterSpacing=".1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:background="@drawable/background_button" />
+
+                <EditText
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="মতামত"
+                    android:drawableLeft="@drawable/description"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:padding="12dp"
+                    android:drawablePadding="5dp"
+                    android:layout_below="@+id/buyAndSellMoney"
+                    android:inputType="text"
+                    android:fontFamily="@font/mukti"
+                    android:textColor="@color/black"
+                    android:letterSpacing=".1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:background="@drawable/background_button" />
+
+                <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                    android:id="@+id/nextStepBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:text="পরবর্তী"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:elevation="2dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textStyle="bold"
+                    android:layout_centerHorizontal="true"
+                    android:fontFamily="@font/mukti"
+                    android:layout_below="@+id/description"
+                    android:backgroundTint="@color/black" />
+
+
+
+            </RelativeLayout>
+
+        </ScrollView>
+    </RelativeLayout>
+
+
+</RelativeLayout>

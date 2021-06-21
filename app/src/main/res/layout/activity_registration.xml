@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_primary"
+    tools:context=".View.Activity.RegistrationActivity">
+
+    <RelativeLayout
+        android:id="@+id/registrationLay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ব্যবসার হিসাব"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:letterSpacing=".1"
+            android:fontFamily="@font/mukti"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginLeft="32dp"
+            android:layout_above="@+id/demo2" />
+
+        <TextView
+            android:id="@+id/demo2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="32dp"
+            android:fontFamily="@font/mukti"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:text="রেজিস্ট্রেশন করতে বা লগইন করতে মোবাইল নম্বর, দোকানের নাম এবং পাসওয়ার্ড দিন ।"
+            android:layout_above="@+id/phoneNumber"/>
+
+
+        <EditText
+            android:id="@+id/phoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="মোবাইল নম্বর "
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginTop="32dp"
+            android:padding="12dp"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:elevation="5dp"
+            android:fontFamily="@font/mukti"
+            android:layout_above="@+id/shopName"
+            android:textColor="@color/black"
+            android:letterSpacing=".1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:background="@drawable/background_button" />
+
+        <EditText
+            android:id="@+id/shopName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="দোকানের নাম "
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginTop="8dp"
+            android:padding="12dp"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:elevation="5dp"
+            android:fontFamily="@font/mukti"
+            android:layout_above="@+id/password"
+            android:textColor="@color/black"
+            android:letterSpacing=".1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:background="@drawable/background_button" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="পাসওয়ার্ড "
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginTop="8dp"
+            android:padding="12dp"
+            android:imeOptions="actionNext"
+            android:inputType="textPassword"
+            android:elevation="5dp"
+            android:fontFamily="@font/mukti"
+            android:layout_above="@+id/confirmPassword"
+            android:textColor="@color/black"
+            android:letterSpacing=".1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:background="@drawable/background_button" />
+
+        <EditText
+            android:id="@+id/confirmPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="পাসওয়ার্ড "
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginTop="8dp"
+            android:padding="12dp"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            android:elevation="5dp"
+            android:fontFamily="@font/mukti"
+            android:layout_centerInParent="true"
+            android:textColor="@color/black"
+            android:letterSpacing=".1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:background="@drawable/background_button" />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/nextStepBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="32dp"
+            android:text="পরবর্তী"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:elevation="2dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/mukti"
+            android:layout_below="@+id/confirmPassword"
+            android:backgroundTint="@color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/nextStepBtn"
+            android:gravity="end"
+            android:layout_marginRight="32dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/black"
+                android:text="যদি রেগিস্ট্রেশন করে থাকেন? "/>
+
+            <TextView
+                android:id="@+id/logInLayBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:text=" লগইন করুন "/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/verifyLayOut"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/demoImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_verify"
+            android:layout_above="@+id/demoText"
+            android:layout_centerHorizontal="true"/>
+        <TextView
+
+            android:id="@+id/demoText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:text="@string/demo_verification_text"
+            android:layout_above="@+id/phoneNumberTxt"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+        <TextView
+            android:id="@+id/phoneNumberTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/red"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@+id/verifyLay"
+            android:text="01751330394 " />
+
+        <LinearLayout
+            android:id="@+id/verifyLay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal">
+
+
+            <EditText
+                android:id="@+id/verifyCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="৬ সংখ্যার কোড"
+                android:gravity="center"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/background_button"
+                android:padding="12dp" />
+
+
+        </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/nextStepVerifyBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="32dp"
+            android:text="পরবর্তী"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/mukti"
+            android:layout_below="@+id/verifyLay"
+            android:backgroundTint="@color/black" />
+
+
+    </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+</RelativeLayout>

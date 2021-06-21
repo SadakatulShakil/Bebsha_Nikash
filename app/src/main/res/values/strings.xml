@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">হিসাব</string>
+    <string name="demo_verification_text">৬ সংখার OTP নম্বরটি দিন! <br></br> যা পাঠানো হয়েছে </string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="drawer_closed">drawer_closed</string>
+    <string name="drawer_open">drawer_open</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

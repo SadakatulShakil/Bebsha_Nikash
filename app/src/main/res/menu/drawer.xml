@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+   <group>
+      <item
+          android:title="হিসাব বিবরণী">
+         <menu>
+            <item
+                android:id="@+id/buy_sellNv"
+                android:title="বেচা কেনা"/>
+
+            <item
+                android:id="@+id/expenseNv"
+                android:title="খরচ"/>
+
+            <item
+                android:id="@+id/cashCalculateNv"
+                android:title="ক্যাশ হিসাব" />
+
+            <item
+                android:id="@+id/dueCalculationNv"
+                android:title="বাকি হিসাব" />
+
+         </menu>
+      </item>
+
+
+   </group>
+   <group>
+      <item
+          android:title="অন্যান্য">
+         <menu>
+            <item
+                android:id="@+id/backupDataNv"
+                android:title="ডাটা ব্যাকআপ" />
+
+            <item
+                android:id="@+id/reminderNv"
+                android:title="তাগাদা পাঠাই" />
+
+            <item
+                android:id="@+id/settingsNv"
+                android:title="সেটিংস" />
+
+            <item
+                android:id="@+id/referNv"
+                android:title="রেফার করুন" />
+
+            <item
+                android:id="@+id/logOutNv"
+                android:title="লগ আউট" />
+
+         </menu>
+      </item>
+   </group>
+</menu>
