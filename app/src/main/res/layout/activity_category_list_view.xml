@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View.Activity.CategoryListViewActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarLayLayout"
+        android:layout_width="match_parent"
+        android:background="@color/color_primary"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow"/>
+
+        <TextView
+            android:id="@+id/toolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="তালিকা সমূহ"
+            android:textColor="@color/black"
+            android:fontFamily="@font/mukti"
+            android:layout_marginLeft="35dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            android:letterSpacing=".1" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <EditText
+        android:id="@+id/search_eText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="খোঁজ.."
+        android:drawablePadding="8dp"
+        android:textColorHint="@color/black"
+        android:padding="12dp"
+        android:fontFamily="@font/mukti"
+        android:layout_margin="8dp"
+        android:letterSpacing=".05"
+        android:imeOptions="actionDone"
+        android:layout_below="@+id/toolbarLayLayout"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:background="@drawable/search_background"/>
+
+    <TextView
+        android:id="@+id/search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:layout_marginTop="18dp"
+        android:layout_marginRight="16dp"
+        android:drawableLeft="@drawable/search"
+        android:layout_below="@+id/toolbarLayLayout"
+        android:layout_alignParentRight="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+
+    <TextView
+        android:id="@+id/customAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawablePadding="16dp"
+        android:padding="10dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="2dp"
+        android:textColor="@color/black"
+        android:visibility="gone"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/search_eText"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:background="@drawable/background_card"
+        android:text="যোগ করুন"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listRevView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="8dp"
+        tools:itemCount="10"
+        android:layout_below="@+id/customAdd"
+        tools:listitem="@layout/spinner_view" />
+
+
+</RelativeLayout>

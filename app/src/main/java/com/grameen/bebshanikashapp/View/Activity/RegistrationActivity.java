@@ -146,14 +146,21 @@ public class RegistrationActivity extends AppCompatActivity {
             public void onResponse(Call<SignUp> call, Response<SignUp> response) {
                 if(response.code() == 200){
                     SignUp signUpRes = response.body();
-                    progressBar.setVisibility(View.GONE);
-                    registrationLay.setVisibility(View.GONE);
-                    verifyLayOut.setVisibility(View.VISIBLE);
-                    resVerifyCode = String.valueOf(signUpRes.getSmsCode());
-                    phoneNumberTxt.setText(signUpRes.getPhone());
-                    verifyCode.setText(resVerifyCode);
+                    if(signUpRes.getStatus().equals("1")) {
+                        progressBar.setVisibility(View.GONE);
+                        registrationLay.setVisibility(View.GONE);
+                        verifyLayOut.setVisibility(View.VISIBLE);
+                        resVerifyCode = String.valueOf(signUpRes.getSmsCode());
+                        phoneNumberTxt.setText(signUpRes.getPhone());
+                        verifyCode.setText(resVerifyCode);
 
-                    Log.d(TAG, "onResponse: "+ response.body());
+                        Log.d(TAG, "onResponse: " + response.body());
+                    }else if (signUpRes.getStatus().equals("0")){
+                        progressBar.setVisibility(View.GONE);
+                        Toast.makeText(RegistrationActivity.this, signUpRes.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }else{
+                    Toast.makeText(RegistrationActivity.this, "কোথাও একটা ভুল হয়েছে ", Toast.LENGTH_SHORT).show();
                 }
             }
 

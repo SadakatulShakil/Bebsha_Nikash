@@ -1,48 +1,28 @@
-package com.grameen.bebshanikashapp.View.Fragment;
+package com.grameen.bebshanikashapp.View.Activity;
 
-import android.content.Context;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.grameen.bebshanikashapp.R;
-import com.grameen.bebshanikashapp.View.Activity.ProductListActivity;
 
-public class AccountingFragment extends Fragment {
-
+public class AccountingActivity extends AppCompatActivity {
     private TextView sellCash, buyCash, expenseCash;
     private EditText buyAndSellMoney;
     private TextView selectProduct;
-    private Context context;
-    public AccountingFragment() {
-        // Required empty public constructor
-    }
+    private ImageView backBtn;
+    private String product;
     @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        this.context = context;
-    }
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_accounting, container, false);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        inItView(view);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_accounting);
+        inItView();
         sellCash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,17 +74,43 @@ public class AccountingFragment extends Fragment {
         selectProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, ProductListActivity.class);
+                Intent intent = new Intent(AccountingActivity.this, ProductListActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        Intent i = getIntent();
+        product = (String) i.getSerializableExtra("productInfo");
+        if (product == null) {
+
+            selectProduct.setText("ক্যাটেগরি বাছাই করুন");
+        } else {
+            selectProduct.setText(product);
+        }
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                Intent i = new Intent(AccountingActivity.this, FragmentContainerActivity.class);
+                startActivity(i);
             }
         });
     }
 
-    private void inItView(View view) {
-        sellCash = view.findViewById(R.id.sellCash);
-        selectProduct = view.findViewById(R.id.selectProduct);
-        buyCash = view.findViewById(R.id.buyCash);
-        expenseCash = view.findViewById(R.id.expenseCash);
-        buyAndSellMoney = view.findViewById(R.id.buyAndSellMoney);
+    @Override
+    public void onBackPressed() {
+        finish();
+        Intent i = new Intent(AccountingActivity.this, FragmentContainerActivity.class);
+        startActivity(i);
+    }
+
+    private void inItView() {
+        sellCash = findViewById(R.id.sellCash);
+        selectProduct = findViewById(R.id.selectProduct);
+        buyCash = findViewById(R.id.buyCash);
+        expenseCash = findViewById(R.id.expenseCash);
+        buyAndSellMoney = findViewById(R.id.buyAndSellMoney);
+        backBtn = findViewById(R.id.backBtn);
     }
 }

@@ -21,6 +21,10 @@
                 android:id="@+id/dueCalculationNv"
                 android:title="বাকি হিসাব" />
 
+            <item
+                android:id="@+id/productUploadNv"
+                android:title="পণ্য আপলোড" />
+
          </menu>
       </item>
 

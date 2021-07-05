@@ -2,15 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.grameen.bebshanikashapp">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BebshaNikashApp">
-        <activity android:name=".View.Activity.RegistrationActivity"></activity>
+        <activity android:name=".View.Activity.AccountingActivity"></activity>
+        <activity android:name=".View.Activity.ProductListActivity" />
+        <activity android:name=".View.Activity.CategoryListViewActivity" />
+        <activity android:name=".View.Activity.ProductUploadActivity" />
+        <activity android:name=".View.Activity.RegistrationActivity" />
         <activity android:name=".View.Activity.AddCustomerActivity" />
         <activity android:name=".View.Activity.FragmentContainerActivity" />
         <activity android:name=".View.Activity.SplashActivity" />
@@ -22,7 +26,18 @@
             </intent-filter>
         </activity>
     </application>
-
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission. ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
 </manifest>

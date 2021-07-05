@@ -2,6 +2,7 @@ package com.grameen.bebshanikashapp.View.Fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -30,6 +31,9 @@ import com.google.android.material.tabs.TabLayout;
 import com.grameen.bebshanikashapp.Adapters.CustomerListAdapter;
 import com.grameen.bebshanikashapp.R;
 import com.grameen.bebshanikashapp.View.Activity.AddCustomerActivity;
+import com.grameen.bebshanikashapp.View.Activity.FragmentContainerActivity;
+import com.grameen.bebshanikashapp.View.Activity.MainActivity;
+import com.grameen.bebshanikashapp.View.Activity.ProductUploadActivity;
 
 public class HomeFragment extends Fragment {
     private Context context;
@@ -44,6 +48,7 @@ public class HomeFragment extends Fragment {
     private LinearLayout demoLay, cashCalculationView;
     private String magic = "1";
     private ImageView magicTool, magicTool2;
+    SharedPreferences preferences;
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -169,6 +174,12 @@ public class HomeFragment extends Fragment {
                         Toast.makeText(context, "About Under Construction be Patient!", Toast.LENGTH_LONG).show();
                         break;
 
+                    case R.id.productUploadNv:
+                        Intent intent3 = new Intent(context, ProductUploadActivity.class);
+                        startActivity(intent3);
+                        //Toast.makeText(context, "About Under Construction be Patient!", Toast.LENGTH_LONG).show();
+                        break;
+
                     case R.id.backupDataNv:
                        /* Intent intent3 = new Intent(context, AboutUsActivity.class);
                         startActivity(intent3);*/
@@ -194,10 +205,11 @@ public class HomeFragment extends Fragment {
                         break;
 
                     case R.id.logOutNv:
-                        /*firebaseAuth.signOut();
-                        finish();
-                        Intent intent1 = new Intent(UserUiContainerActivity.this, MainActivity.class);
-                        startActivity(intent1);*/
+                        getActivity().finish();
+                        preferences = context.getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+                        preferences.edit().putString("TOKEN", null).apply();
+                        Intent logOutIntent = new Intent(context, MainActivity.class);
+                        startActivity(logOutIntent);
                         Toast.makeText(context, "Successfully Log Out", Toast.LENGTH_LONG).show();
                         break;
 
