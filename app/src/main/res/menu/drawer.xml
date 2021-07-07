@@ -21,10 +21,6 @@
                 android:id="@+id/dueCalculationNv"
                 android:title="বাকি হিসাব" />
 
-            <item
-                android:id="@+id/productUploadNv"
-                android:title="পণ্য আপলোড" />
-
          </menu>
       </item>
 
@@ -35,12 +31,13 @@
           android:title="অন্যান্য">
          <menu>
             <item
-                android:id="@+id/backupDataNv"
-                android:title="ডাটা ব্যাকআপ" />
+                android:id="@+id/productUploadNv"
+                android:title="পণ্য আপলোড" />
 
             <item
-                android:id="@+id/reminderNv"
-                android:title="তাগাদা পাঠাই" />
+                android:id="@+id/myProductNv"
+                android:title="আমার পণ্য" />
+
 
             <item
                 android:id="@+id/settingsNv"

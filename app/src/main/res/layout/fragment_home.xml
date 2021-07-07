@@ -284,27 +284,89 @@
 
         </LinearLayout>
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayOut"
+        <LinearLayout
+            android:id="@+id/primaryLay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_below="@+id/searchLay"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/customer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:layout_margin="5dp"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:background="@drawable/background_card"
+                android:text="কাস্টমার"/>
+
+            <TextView
+                android:id="@+id/seller"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:layout_margin="5dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:background="@drawable/background_card_black"
+                android:text="বিক্রেতা"/>
+
+            <TextView
+                android:id="@+id/supplier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:layout_margin="5dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:background="@drawable/background_card_black"
+                android:text="সাপ্লায়ার"/>
+
+        </LinearLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listRevView1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:layout_marginTop="5dp"
-            app:tabIndicatorHeight="0dp"
-            app:tabBackground="@drawable/view_pager_back"
-            app:tabTextAppearance="@style/tab_text"
-            app:tabSelectedTextColor="@color/black"
-            android:layout_below="@+id/searchLay"/>
+            android:layout_marginBottom="8dp"
+            tools:itemCount="10"
+            android:layout_below="@+id/primaryLay"
+            tools:listitem="@layout/customer_lay" />
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPager"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listRevView2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:layout_marginTop="5dp"
-            android:layout_below="@+id/tabLayOut"/>
+            android:layout_marginBottom="8dp"
+            tools:itemCount="10"
+            android:visibility="gone"
+            android:layout_below="@+id/primaryLay"
+            tools:listitem="@layout/customer_lay" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listRevView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
+            tools:itemCount="10"
+            android:visibility="gone"
+            android:layout_below="@+id/primaryLay"
+            tools:listitem="@layout/customer_lay" />
+
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/addCustomerBt"
@@ -318,6 +380,14 @@
             android:fontFamily="@font/mukti"
             android:backgroundTint="@color/color_primary"
             android:layout_alignParentRight="true" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
 
     </RelativeLayout>
 

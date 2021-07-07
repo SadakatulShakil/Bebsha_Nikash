@@ -10,7 +10,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BebshaNikashApp">
-        <activity android:name=".View.Activity.AccountingActivity"></activity>
+        <activity android:name=".View.Activity.PhoneBookListActivity"></activity>
+        <activity android:name=".View.Activity.UpdateProfileActivity" />
+        <activity android:name=".View.Activity.ProfileActivity" />
+        <activity android:name=".View.Activity.UpdateProductActivity" />
+        <activity android:name=".View.Activity.MyProductActivity" />
+        <activity android:name=".View.Activity.AccountingActivity" />
         <activity android:name=".View.Activity.ProductListActivity" />
         <activity android:name=".View.Activity.CategoryListViewActivity" />
         <activity android:name=".View.Activity.ProductUploadActivity" />

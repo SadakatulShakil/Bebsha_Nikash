@@ -38,7 +38,7 @@ public class CategoryListViewActivity extends AppCompatActivity {
     private EditText search_eText;
     private RecyclerView listRevView;
     private CategoryAdapter categoryAdapter;
-    private String searchText, retrievedToken;
+    private String searchText, retrievedToken, from;
     private SharedPreferences preferences;
     ImageView backBtn;
     @Override
@@ -48,6 +48,8 @@ public class CategoryListViewActivity extends AppCompatActivity {
 
         //initCategoryList();
         initView();
+        Intent intent = getIntent();
+        from = intent.getStringExtra("from");
         preferences = getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         retrievedToken  = preferences.getString("TOKEN",null);
         getCategories();
@@ -153,9 +155,10 @@ public class CategoryListViewActivity extends AppCompatActivity {
             customAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(CategoryListViewActivity.this, ProductUploadActivity.class);
-                    intent.putExtra("categoryInfo", search_eText.getText().toString().trim());
-                    startActivity(intent);
+                        Intent intent = new Intent(CategoryListViewActivity.this, ProductUploadActivity.class);
+                        intent.putExtra("categoryInfo", search_eText.getText().toString().trim());
+                        startActivity(intent);
+
                 }
             });
         }

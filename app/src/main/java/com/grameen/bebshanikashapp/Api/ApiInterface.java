@@ -1,5 +1,7 @@
 package com.grameen.bebshanikashapp.Api;
 
+import com.grameen.bebshanikashapp.Model.AddCustomer.AddCustomer;
+import com.grameen.bebshanikashapp.Model.AllCustomer.AllCustomer;
 import com.grameen.bebshanikashapp.Model.AllProducts.AllProducts;
 import com.grameen.bebshanikashapp.Model.AllProducts.Product;
 import com.grameen.bebshanikashapp.Model.AsignRole.AsignRole;
@@ -73,6 +75,40 @@ public interface ApiInterface {
             @Part("category") RequestBody category,
             @Part("photo1\"; filename=\"myProfile.jpg\" " ) RequestBody photo1,
             @Part("photo2\"; filename=\"myProfile2.jpg\" " ) RequestBody photo2
+    );
+
+   /* @Headers("accept: application/json, content-type: multipart/form-data")
+    @Multipart
+    @POST("api/products/7?_method=")
+    Call<UpdateProduct> postByUpdateProduct(
+            @Header("Authorization") String token,
+            @Part("product_name") RequestBody product_name,
+            @Part("description") RequestBody description,
+            @Part("buying_price") RequestBody buying_price,
+            @Part("selling_price") RequestBody selling_price,
+            @Part("sku") RequestBody sku,
+            @Part("quantity") RequestBody quantity,
+            @Part("unit") RequestBody unit,
+            @Part("category") RequestBody category,
+            @Part("photo1\"; filename=\"myProfile.jpg\" " ) RequestBody photo1,
+            @Part("photo2\"; filename=\"myProfile2.jpg\" " ) RequestBody photo2
+    );*/
+
+    @Headers("accept: application/json, content-type: multipart/form-data")
+    @FormUrlEncoded
+    @POST("customers")
+    Call<AddCustomer> postByAddCustomer(
+            @Header("Authorization") String token,
+            @Field("name") String name,
+            @Field("phone") String phone,
+            @Field("role") String role,
+            @Field("password") String password
+    );
+
+    @Headers("accept: application/json, content-type: multipart/form-data")
+    @GET("customers")
+    Call<AllCustomer> getByAllCustomer(
+            @Header("Authorization") String token
     );
 
 }

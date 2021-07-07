@@ -93,7 +93,7 @@
         android:letterSpacing=".1"
         android:clickable="true"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:background="@drawable/background_button" />
+        android:background="@drawable/background_card_white" />
 
     <EditText
         android:id="@+id/customerName"
@@ -131,6 +131,25 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:background="@drawable/background_button" />
 
+    <EditText
+        android:id="@+id/beforeAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="পূর্বের বাকি (জের)"
+        android:drawableLeft="@drawable/expense"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:padding="12dp"
+        android:layout_below="@+id/phoneNumber"
+        android:inputType="number"
+        android:fontFamily="@font/mukti"
+        android:textColor="@color/black"
+        android:letterSpacing=".1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:background="@drawable/background_button" />
+
+
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/nextStepBtn"
         android:layout_width="match_parent"
@@ -144,7 +163,15 @@
         android:textStyle="bold"
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/mukti"
-        android:layout_below="@+id/phoneNumber"
+        android:layout_below="@+id/beforeAmount"
         android:backgroundTint="@color/black" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
 
 </RelativeLayout>

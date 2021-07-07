@@ -80,7 +80,7 @@ public class ProductUploadActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ProductUploadActivity.this, CategoryListViewActivity.class);
-                intent.putExtra("list", "category");
+                intent.putExtra("from", "upload");
                 startActivity(intent);
             }
         });

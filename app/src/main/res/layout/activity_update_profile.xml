@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/back"
+    tools:context=".View.Activity.UpdateProfileActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarLayLayout"
+        android:layout_width="match_parent"
+        android:background="@color/color_primary"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow"/>
+
+        <TextView
+            android:id="@+id/tool"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="প্রোফাইল"
+            android:textColor="@color/black"
+            android:fontFamily="@font/mukti"
+            android:layout_marginLeft="35dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            android:letterSpacing=".1" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/viewLay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_margin="16dp"
+        android:layout_below="@+id/toolbarLayLayout"
+        android:background="@drawable/edit_text_border"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/user_image"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/circle"
+            app:civ_border_width="3dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/notification"
+            app:civ_border_color="@color/black"/>
+
+        <ImageView
+            android:id="@+id/upProPic"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/ic_add_photo" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="5dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:text="ফোন নম্বর"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="01751330394"
+                android:layout_weight="1"
+
+                android:fontFamily="@font/mukti"
+                android:padding="8dp"
+                android:background="@drawable/search_background"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/viewLay">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ব্যবসা প্রতিষ্ঠানের নাম"
+                android:layout_marginLeft="16dp"
+                android:fontFamily="@font/mukti"/>
+
+            <EditText
+                android:id="@+id/shopName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="ব্যবসা প্রতিষ্ঠানের নাম দিন"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="5dp"
+                android:padding="12dp"
+                android:layout_below="@+id/dateFieldText"
+                android:inputType="number"
+                android:fontFamily="@font/mukti"
+                android:textColor="@color/black"
+                android:letterSpacing=".1"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:background="@drawable/background_card_white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ব্যবসার ইমেইল"
+                android:layout_marginLeft="16dp"
+                android:fontFamily="@font/mukti"/>
+
+            <TextView
+                android:id="@+id/businessEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="ব্যবসার ইমেইল দিন"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="5dp"
+                android:padding="12dp"
+                android:layout_below="@+id/dateFieldText"
+                android:inputType="number"
+                android:fontFamily="@font/mukti"
+                android:textColor="@color/black"
+                android:letterSpacing=".1"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:background="@drawable/background_card_white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ব্যবসার ধরন"
+                android:layout_marginLeft="16dp"
+                android:fontFamily="@font/mukti"/>
+
+            <TextView
+                android:id="@+id/businessType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="ব্যবসার ধরন দিন"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="5dp"
+                android:padding="12dp"
+                android:layout_below="@+id/dateFieldText"
+                android:inputType="number"
+                android:fontFamily="@font/mukti"
+                android:textColor="@color/black"
+                android:letterSpacing=".1"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:background="@drawable/background_card_white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ট্রেড লাইসেন্স নম্বর"
+                android:layout_marginLeft="16dp"
+                android:fontFamily="@font/mukti"/>
+
+            <TextView
+                android:id="@+id/tradeLicence"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="ট্রেড লাইসেন্স নম্বর দিন"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="5dp"
+                android:padding="12dp"
+                android:layout_below="@+id/dateFieldText"
+                android:inputType="number"
+                android:fontFamily="@font/mukti"
+                android:textColor="@color/black"
+                android:letterSpacing=".1"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:background="@drawable/background_card_white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NID নম্বর"
+                android:layout_marginLeft="16dp"
+                android:fontFamily="@font/mukti"/>
+
+            <TextView
+                android:id="@+id/nidNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="NID নম্বর দিন"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="5dp"
+                android:padding="12dp"
+                android:layout_below="@+id/dateFieldText"
+                android:inputType="number"
+                android:fontFamily="@font/mukti"
+                android:textColor="@color/black"
+                android:letterSpacing=".1"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:background="@drawable/background_card_white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ব্যবসা শুরুর তারিখ"
+                android:layout_marginLeft="16dp"
+                android:fontFamily="@font/mukti"/>
+
+            <TextView
+                android:id="@+id/startDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="ব্যবসা শুরুর তারিখ দিন"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:padding="12dp"
+                android:layout_below="@+id/dateFieldText"
+                android:inputType="number"
+                android:fontFamily="@font/mukti"
+                android:textColor="@color/black"
+                android:letterSpacing=".1"
+                android:layout_marginBottom="5dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:background="@drawable/background_card_white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="বিভাগ"
+                android:layout_marginLeft="16dp"
+                android:fontFamily="@font/mukti"/>
+
+            <Spinner
+                android:id="@+id/divisionSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="25dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/edit_text_border"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="জেলা"
+                android:layout_marginLeft="16dp"
+                android:fontFamily="@font/mukti"/>
+
+            <Spinner
+                android:id="@+id/districtSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="25dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/edit_text_border"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="উপজেলা"
+                android:layout_marginLeft="16dp"
+                android:fontFamily="@font/mukti"/>
+
+            <Spinner
+                android:id="@+id/upazilaSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="25dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/edit_text_border"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ইউনিউন"
+                android:layout_marginLeft="16dp"
+                android:fontFamily="@font/mukti"/>
+
+            <Spinner
+                android:id="@+id/unionSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="25dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/edit_text_border"/>
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/nextStepBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="8dp"
+                android:text="নিশ্চিত করুন"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:elevation="2dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textStyle="bold"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/mukti"
+                android:layout_below="@+id/phoneNumber"
+                android:backgroundTint="@color/black" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+</RelativeLayout>

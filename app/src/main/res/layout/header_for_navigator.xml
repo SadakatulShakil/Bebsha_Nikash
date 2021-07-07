@@ -26,6 +26,7 @@
             app:civ_border_color="@color/black"/>
 
         <LinearLayout
+            android:id="@+id/profileOption"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -34,6 +35,7 @@
             android:layout_gravity="center_vertical">
 
             <TextView
+                android:id="@+id/businessName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="দোকানের নাম"
@@ -44,6 +46,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
             <TextView
+                android:id="@+id/phoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="01751330394"
@@ -54,11 +57,6 @@
 
         </LinearLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_edit"/>
 
     </LinearLayout>
     <View
