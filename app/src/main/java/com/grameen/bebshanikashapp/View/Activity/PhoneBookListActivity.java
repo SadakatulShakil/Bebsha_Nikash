@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -26,7 +27,7 @@ public class PhoneBookListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_book_list);
         inItView();
-
+        Intent intent = getIntent();
         contactAdapter = new ContactAdapter(PhoneBookListActivity.this, mContactListArrayList);
         listRevView.setLayoutManager(new LinearLayoutManager(PhoneBookListActivity.this));
         listRevView.setAdapter(contactAdapter);

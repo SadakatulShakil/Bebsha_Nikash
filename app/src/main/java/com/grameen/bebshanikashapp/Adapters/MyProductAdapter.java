@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.grameen.bebshanikashapp.Model.AllProducts.Product;
 import com.grameen.bebshanikashapp.R;
+import com.grameen.bebshanikashapp.View.Activity.ProductDetailsActivity;
 import com.grameen.bebshanikashapp.View.Activity.UpdateProductActivity;
 import com.squareup.picasso.Picasso;
 
@@ -51,8 +52,7 @@ public class MyProductAdapter extends RecyclerView.Adapter<MyProductAdapter.view
     holder.itemView.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            ((Activity)context).finish();
-            Intent intent = new Intent(context, UpdateProductActivity.class);
+            Intent intent = new Intent(context, ProductDetailsActivity.class);
             intent.putExtra("productInfo", productInfo);
             context.startActivity(intent);
         }

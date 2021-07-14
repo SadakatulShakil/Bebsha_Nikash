@@ -100,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.d(TAG, "onStatus: " + logInInfo.getStatus());
                         if(logInInfo.getStatus().equals("1")) {
                             progressBar.setVisibility(View.GONE);
+                            finish();
                             Log.d(TAG, "onToken: " + logInInfo.getToken());
                             SharedPreferences preferences = getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
                             preferences.edit().putString("TOKEN", logInInfo.getToken()).apply();

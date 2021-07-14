@@ -39,15 +39,21 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+import com.grameen.bebshanikashapp.Adapters.BuyerAdapter;
 import com.grameen.bebshanikashapp.Adapters.CustomerAdapter;
 import com.grameen.bebshanikashapp.Adapters.CustomerListAdapter;
 import com.grameen.bebshanikashapp.Adapters.MyProductAdapter;
+import com.grameen.bebshanikashapp.Adapters.SellerAdapter;
 import com.grameen.bebshanikashapp.Api.ApiInterface;
 import com.grameen.bebshanikashapp.Api.RetrofitClient;
+import com.grameen.bebshanikashapp.Model.AllBuyer.AllBuyers;
+import com.grameen.bebshanikashapp.Model.AllBuyer.Buyer;
 import com.grameen.bebshanikashapp.Model.AllCustomer.AllCustomer;
 import com.grameen.bebshanikashapp.Model.AllCustomer.Customer;
 import com.grameen.bebshanikashapp.Model.AllCustomer.Relation;
 import com.grameen.bebshanikashapp.Model.AllProducts.AllProducts;
+import com.grameen.bebshanikashapp.Model.AllSellers.AllSellers;
+import com.grameen.bebshanikashapp.Model.AllSellers.Seller;
 import com.grameen.bebshanikashapp.R;
 import com.grameen.bebshanikashapp.View.Activity.AddCustomerActivity;
 import com.grameen.bebshanikashapp.View.Activity.FragmentContainerActivity;
@@ -79,7 +85,11 @@ public class HomeFragment extends Fragment {
     SharedPreferences preferences;
     private TextView customer, seller, supplier;
     private ArrayList<Customer> customerArrayList = new ArrayList<>();
+    private ArrayList<Buyer> buyerArrayList = new ArrayList<>();
+    private ArrayList<Seller> sellerArrayList = new ArrayList<>();
     private CustomerAdapter customerAdapter;
+    private BuyerAdapter buyerAdapter;
+    private SellerAdapter sellerAdapter;
     private ProgressBar progressBar;
     private RecyclerView listRevView1, listRevView2, listRevView3;
     public HomeFragment() {
@@ -109,6 +119,7 @@ public class HomeFragment extends Fragment {
         preferences = context.getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         retrievedToken  = preferences.getString("TOKEN",null);
         getAllCustomerList();
+        //getAllBuyerList();
         View header = navigationView.getHeaderView(0);
         profileOption = header.findViewById(R.id.profileOption);
         user_image = header.findViewById(R.id.user_image);
@@ -135,7 +146,7 @@ public class HomeFragment extends Fragment {
         customer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                getAllCustomerList();
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     customer.setBackground(getResources().getDrawable(R.drawable.background_card));
                 }
@@ -151,7 +162,7 @@ public class HomeFragment extends Fragment {
         seller.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                getAllSellersList();
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     customer.setBackground(getResources().getDrawable(R.drawable.background_card_black));
                 }
@@ -167,7 +178,7 @@ public class HomeFragment extends Fragment {
         supplier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                getAllBuyerList();
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     customer.setBackground(getResources().getDrawable(R.drawable.background_card_black));
                 }
@@ -212,6 +223,88 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    private void getAllSellersList() {
+        progressBar.setVisibility(View.VISIBLE);
+        Retrofit retrofit = RetrofitClient.getRetrofitClient1();
+        ApiInterface api = retrofit.create(ApiInterface.class);
+
+        Call<AllSellers> sellersCall = api.getByAllSeller("Bearer " + retrievedToken);
+
+        sellersCall.enqueue(new Callback<AllSellers>() {
+            @Override
+            public void onResponse(Call<AllSellers> call, Response<AllSellers> response) {
+                Log.d(TAG, "onResponse: " + response.code());
+                if(response.code() == 200){
+                    buyerArrayList.clear();
+                    progressBar.setVisibility(View.GONE);
+                    AllSellers sellers = response.body();
+                    sellerArrayList.addAll(sellers.getSellers());
+                }else if(response.code() == 401){
+                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(context, "নতুন করে লগ-ইন করুন", Toast.LENGTH_SHORT).show();
+                    getActivity().finish();
+                    preferences = context.getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+                    preferences.edit().putString("TOKEN", null).apply();
+                    Intent logOutIntent = new Intent(context, MainActivity.class);
+                    startActivity(logOutIntent);
+                }else {
+                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(context, "সার্ভার এ সমস্যা হয়েছে!", Toast.LENGTH_SHORT).show();
+                }
+                sellerAdapter = new SellerAdapter(context, sellerArrayList);
+                listRevView1.setLayoutManager(new LinearLayoutManager(context));
+                listRevView1.setAdapter(sellerAdapter);
+                sellerAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<AllSellers> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void getAllBuyerList() {
+        progressBar.setVisibility(View.VISIBLE);
+        Retrofit retrofit = RetrofitClient.getRetrofitClient1();
+        ApiInterface api = retrofit.create(ApiInterface.class);
+
+        Call<AllBuyers> buyersCall = api.getByAllBuyer("Bearer " + retrievedToken);
+
+        buyersCall.enqueue(new Callback<AllBuyers>() {
+            @Override
+            public void onResponse(Call<AllBuyers> call, Response<AllBuyers> response) {
+                Log.d(TAG, "onResponse: " + response.code());
+                if(response.code() == 200){
+                    buyerArrayList.clear();
+                    progressBar.setVisibility(View.GONE);
+                    AllBuyers buyers = response.body();
+                    buyerArrayList.addAll(buyers.getBuyers());
+                }else if(response.code() == 401){
+                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(context, "নতুন করে লগ-ইন করুন", Toast.LENGTH_SHORT).show();
+                    getActivity().finish();
+                    preferences = context.getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+                    preferences.edit().putString("TOKEN", null).apply();
+                    Intent logOutIntent = new Intent(context, MainActivity.class);
+                    startActivity(logOutIntent);
+                }else {
+                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(context, "সার্ভার এ সমস্যা হয়েছে!", Toast.LENGTH_SHORT).show();
+                }
+                buyerAdapter = new BuyerAdapter(context, buyerArrayList);
+                listRevView1.setLayoutManager(new LinearLayoutManager(context));
+                listRevView1.setAdapter(buyerAdapter);
+                buyerAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<AllBuyers> call, Throwable t) {
+
+            }
+        });
+    }
+
     private void getAllCustomerList() {
         progressBar.setVisibility(View.VISIBLE);
         Retrofit retrofit = RetrofitClient.getRetrofitClient1();
@@ -224,6 +317,7 @@ public class HomeFragment extends Fragment {
             public void onResponse(Call<AllCustomer> call, Response<AllCustomer> response) {
                 Log.d(TAG, "onResponse: " + response.code());
                 if(response.code() == 200){
+                    customerArrayList.clear();
                     progressBar.setVisibility(View.GONE);
                     AllCustomer customer = response.body();
                     customerArrayList.addAll(customer.getCustomers());

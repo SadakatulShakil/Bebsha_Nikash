@@ -1,9 +1,12 @@
 package com.grameen.bebshanikashapp.Api;
 
 import com.grameen.bebshanikashapp.Model.AddCustomer.AddCustomer;
+import com.grameen.bebshanikashapp.Model.AllBuyer.AllBuyers;
 import com.grameen.bebshanikashapp.Model.AllCustomer.AllCustomer;
 import com.grameen.bebshanikashapp.Model.AllProducts.AllProducts;
 import com.grameen.bebshanikashapp.Model.AllProducts.Product;
+import com.grameen.bebshanikashapp.Model.AllSellers.AllSellers;
+import com.grameen.bebshanikashapp.Model.AllTransection.AllTransection;
 import com.grameen.bebshanikashapp.Model.AsignRole.AsignRole;
 import com.grameen.bebshanikashapp.Model.Categories.Categories;
 import com.grameen.bebshanikashapp.Model.LogIn.LogIn;
@@ -109,6 +112,34 @@ public interface ApiInterface {
     @GET("customers")
     Call<AllCustomer> getByAllCustomer(
             @Header("Authorization") String token
+    );
+
+    @Headers("accept: application/json, content-type: multipart/form-data")
+    @GET("buyers")
+    Call<AllBuyers> getByAllBuyer(
+            @Header("Authorization") String token
+    );
+
+    @Headers("accept: application/json, content-type: multipart/form-data")
+    @GET("sellers")
+    Call<AllSellers> getByAllSeller(
+            @Header("Authorization") String token
+    );
+
+    @Headers("accept: application/json, content-type: multipart/form-data")
+    @Multipart
+    @POST("debitCredit")
+    Call<AllTransection> postByTransection(
+            @Header("Authorization") String token,
+            @Part("ref_user_id") RequestBody ref_user_id,
+            @Part("debit") RequestBody debit,
+            @Part("credit") RequestBody credit,
+            @Part("product_id") RequestBody product_id,
+            @Part("txn_type") RequestBody txn_type,
+            @Part("txn_date") RequestBody txn_date,
+            @Part("comment") RequestBody comment,
+            @Part("photo1\"; filename=\"myProfile.jpg\" " ) RequestBody photo1,
+            @Part("photo2\"; filename=\"myProfile2.jpg\" " ) RequestBody photo2
     );
 
 }

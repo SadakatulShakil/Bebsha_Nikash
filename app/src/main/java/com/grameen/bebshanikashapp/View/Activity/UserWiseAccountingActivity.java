@@ -2,6 +2,8 @@ package com.grameen.bebshanikashapp.View.Activity;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -21,58 +23,99 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.grameen.bebshanikashapp.Adapters.ProductAdapter;
 import com.grameen.bebshanikashapp.Api.ApiInterface;
 import com.grameen.bebshanikashapp.Api.RetrofitClient;
+import com.grameen.bebshanikashapp.Model.AllCustomer.Customer;
+import com.grameen.bebshanikashapp.Model.AllProducts.AllProducts;
 import com.grameen.bebshanikashapp.Model.AllProducts.Product;
 import com.grameen.bebshanikashapp.Model.AllTransection.AllTransection;
-import com.grameen.bebshanikashapp.Model.UploadProduct.UploadProduct;
 import com.grameen.bebshanikashapp.R;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
 import static android.content.ContentValues.TAG;
 
-public class AccountingActivity extends AppCompatActivity {
-    private TextView sellCash, buyCash, expenseCash, dateFieldText;
+public class UserWiseAccountingActivity extends AppCompatActivity {
+
+    private TextView sellCash, buyCash, expenseCash, dateFieldText, userName, gettingBlnc, givenBlnc, detailTransection;
     private ProgressBar progressBar;
     private ExtendedFloatingActionButton nextStepBtn;
     private EditText buyAndSellMoney, description;
-    private TextView selectProduct;
-    private ImageView backBtn, photo1, photo2;
+    private TextView selectProduct, product_id;
+    private ImageView backBtn, photo1, photo2, backBtn2;
     private File proFile1, proFile2;
     private RequestBody requestBody1, requestBody2;
     private Intent pickIntent, chooseIntent;
     private Uri proImageUri1, proImageUri2;
     private DatePickerDialog.OnDateSetListener startSetListener;
     private Product product;
-    private String ref_id = "";
+    private String ref_id;
     private Double credit = 0.0, debit = 0.0;
     private int productId;
     private SharedPreferences preferences;
-    private String txn_type = "sell", result = null, retrievedToken;
+    private String txn_type = "sell", result = null, retrievedToken, from ="customer_account";
+    private Customer customer;
+    private RelativeLayout parentLay, secondLay;
+
+    private ArrayList<Product> productArrayList = new ArrayList<>();
+    private TextView toolbar, customAdd, customSearch, search;
+    private EditText search_eText;
+    private RecyclerView listRevView;
+    private ProductAdapter productAdapter;
+    private String searchText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_accounting);
+        setContentView(R.layout.activity_user_wise_accounting);
+
         inItView();
         preferences = getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         retrievedToken  = preferences.getString("TOKEN",null);
+        getAllProducts();
+        Log.d(TAG, "onCreate: " + productId);
+        search_eText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                searchByText(s.toString());
+            }
+        });
+        Intent intent = getIntent();
+        customer = (Customer) intent.getSerializableExtra("customerInfo");
+        ref_id = String.valueOf(customer.getRelation().getId());
+        userName.setText(customer.getRelation().getName());
+
         Date c = Calendar.getInstance().getTime();
         System.out.println("Current time => " + c);
 
@@ -89,7 +132,7 @@ public class AccountingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(
-                        AccountingActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        UserWiseAccountingActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         startSetListener, year, month, day);
                 datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 datePickerDialog.show();
@@ -169,13 +212,20 @@ public class AccountingActivity extends AppCompatActivity {
         selectProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AccountingActivity.this, ProductListActivity.class);
-                intent.putExtra("from", "account");
-                startActivity(intent);
+                parentLay.setVisibility(View.GONE);
+                secondLay.setVisibility(View.VISIBLE);
             }
         });
 
-        Intent i = getIntent();
+        backBtn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                parentLay.setVisibility(View.VISIBLE);
+                secondLay.setVisibility(View.GONE);
+            }
+        });
+
+       /* Intent i = getIntent();
         product = (Product) i.getSerializableExtra("productInfo");
         if (product == null) {
 
@@ -183,13 +233,13 @@ public class AccountingActivity extends AppCompatActivity {
         } else {
             selectProduct.setText(product.getProductName());
             productId = product.getId();
-        }
+        }*/
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
-                Intent i = new Intent(AccountingActivity.this, FragmentContainerActivity.class);
+                Intent i = new Intent(UserWiseAccountingActivity.this, FragmentContainerActivity.class);
                 startActivity(i);
             }
         });
@@ -214,6 +264,7 @@ public class AccountingActivity extends AppCompatActivity {
                 String amount = buyAndSellMoney.getText().toString().trim();
                 double creditOrDebit = Double.parseDouble(amount);
                 String comments = description.getText().toString().trim();
+                String pId = product_id.getText().toString().trim();
 
                 if (amount.isEmpty()) {
                     buyAndSellMoney.setError("টাকার পরিমান দিতে হবে");
@@ -236,16 +287,27 @@ public class AccountingActivity extends AppCompatActivity {
                     credit = 0.0;
                     debit = creditOrDebit;
                 }
-                setUpTransection(ref_id, productId, credit, debit, txn_type, dateFieldText.getText().toString().trim(), comments);
+                setUpTransection(ref_id, pId, credit, debit, txn_type, dateFieldText.getText().toString().trim(), comments);
             }
         });
+
     }
 
-    private void setUpTransection(String ref_id, int productId, Double credit, Double debit, String txn_type, String date, String comments) {
+    private void searchByText(String text) {
+
+        ArrayList<Product> filterProductList = new ArrayList<>();
+        for(Product product : productArrayList){
+            if(product.getProductName().toLowerCase().contains(text.toLowerCase())){
+                filterProductList.add(product);
+            }
+        }
+        productAdapter.filterList(filterProductList);
+    }
+
+    private void setUpTransection(String ref_id, String pId, Double credit, Double debit, String txn_type, String date, String comments) {
 
         String creditBlnc = String.valueOf(credit);
         String debitBlnc = String.valueOf(debit);
-        String pId = String.valueOf(productId);
 
         Log.d(TAG, "setUpTransection: "+ "ref_id: "+ref_id+ ", pId: "+pId+ ", creditBlnc: "+creditBlnc+ ", debitBlnc: "
                 +debitBlnc+ ", txn_type: "+txn_type+ ", date: "+date+ ", comments: "+comments);
@@ -285,22 +347,22 @@ public class AccountingActivity extends AppCompatActivity {
                     progressBar.setVisibility(View.GONE);
                     AllTransection allTransection = response.body();
                     if(allTransection.getStatus().equals("1")){
-                        Toast.makeText(AccountingActivity.this, "লেনদেন সফলভাবে সম্পন্ন হয়েছে", Toast.LENGTH_SHORT).show();
-                        Intent i = new Intent(AccountingActivity.this, AccountingActivity.class);
+                        Toast.makeText(UserWiseAccountingActivity.this, "লেনদেন সফলভাবে সম্পন্ন হয়েছে", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(UserWiseAccountingActivity.this, FragmentContainerActivity.class);
                         startActivity(i);
                     }
 
 
                 }else if(response.code() == 401){
-                    Toast.makeText(AccountingActivity.this, "নতুন করে লগ-ইন করুন", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserWiseAccountingActivity.this, "নতুন করে লগ-ইন করুন", Toast.LENGTH_SHORT).show();
                     finish();
                     preferences = getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
                     preferences.edit().putString("TOKEN", null).apply();
-                    Intent logOutIntent = new Intent(AccountingActivity.this, MainActivity.class);
+                    Intent logOutIntent = new Intent(UserWiseAccountingActivity.this, MainActivity.class);
                     startActivity(logOutIntent);
                 }else{
                     progressBar.setVisibility(View.GONE);
-                    Toast.makeText(AccountingActivity.this, "সার্ভার এ সমস্যা হয়েছে!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserWiseAccountingActivity.this, "সার্ভার এ সমস্যা হয়েছে!", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -315,7 +377,7 @@ public class AccountingActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finish();
-        Intent i = new Intent(AccountingActivity.this, FragmentContainerActivity.class);
+        Intent i = new Intent(UserWiseAccountingActivity.this, FragmentContainerActivity.class);
         startActivity(i);
     }
 
@@ -353,7 +415,7 @@ public class AccountingActivity extends AppCompatActivity {
 
     private String getRealPathFromUri(Uri contentUri) {
         String[] proj = {MediaStore.Images.Media.DATA};
-        CursorLoader loader = new CursorLoader(AccountingActivity.this, contentUri, proj, null, null, null);
+        CursorLoader loader = new CursorLoader(UserWiseAccountingActivity.this, contentUri, proj, null, null, null);
         Cursor cursor = loader.loadInBackground();
         int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
         cursor.moveToFirst();
@@ -364,18 +426,68 @@ public class AccountingActivity extends AppCompatActivity {
         return result;
     }
 
+    private void getAllProducts() {
+        Retrofit retrofit = RetrofitClient.getRetrofitClient1();
+        ApiInterface api = retrofit.create(ApiInterface.class);
+
+        Call<AllProducts> productCall = api.getByProduct("Bearer " + retrievedToken);
+
+        productCall.enqueue(new Callback<AllProducts>() {
+            @Override
+            public void onResponse(Call<AllProducts> call, Response<AllProducts> response) {
+                Log.d(TAG, "onResponse: " + response.code());
+                if(response.code() == 200){
+                    AllProducts product = response.body();
+
+                    productArrayList.addAll(product.getProducts());
+                }else if(response.code() == 401){
+                    Toast.makeText(UserWiseAccountingActivity.this, "নতুন করে লগ-ইন করুন", Toast.LENGTH_SHORT).show();
+                    finish();
+                    preferences = getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+                    preferences.edit().putString("TOKEN", null).apply();
+                    Intent logOutIntent = new Intent(UserWiseAccountingActivity.this, MainActivity.class);
+                    startActivity(logOutIntent);
+                }else {
+                    Toast.makeText(UserWiseAccountingActivity.this, "সার্ভার এ সমস্যা হয়েছে!", Toast.LENGTH_SHORT).show();
+                }
+                productAdapter = new ProductAdapter(UserWiseAccountingActivity.this, productArrayList, from, parentLay, secondLay, selectProduct, product_id);
+                listRevView.setLayoutManager(new LinearLayoutManager(UserWiseAccountingActivity.this));
+                listRevView.setAdapter(productAdapter);
+                productAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<AllProducts> call, Throwable t) {
+
+            }
+        });
+    }
+
     private void inItView() {
+
         sellCash = findViewById(R.id.sellCash);
         selectProduct = findViewById(R.id.selectProduct);
         buyCash = findViewById(R.id.buyCash);
         expenseCash = findViewById(R.id.expenseCash);
         buyAndSellMoney = findViewById(R.id.buyAndSellMoney);
         backBtn = findViewById(R.id.backBtn);
+        backBtn2 = findViewById(R.id.backBtn2);
         dateFieldText = findViewById(R.id.dateFieldText);
         photo1 = findViewById(R.id.photo1);
         photo2 = findViewById(R.id.photo2);
         nextStepBtn = findViewById(R.id.nextStepBtn);
         description = findViewById(R.id.description);
         progressBar = findViewById(R.id.progressBar);
+        userName = findViewById(R.id.userName);
+        gettingBlnc = findViewById(R.id.gettingBlnc);
+        givenBlnc = findViewById(R.id.givenBlnc);
+        detailTransection = findViewById(R.id.detailTransection);
+        parentLay = findViewById(R.id.parentLay);
+        secondLay = findViewById(R.id.secondLay);
+        toolbar = findViewById(R.id.toolbar);
+        search_eText = findViewById(R.id.search_eText);
+        listRevView = findViewById(R.id.listRevView);
+        search = findViewById(R.id.search);
+        product_id = findViewById(R.id.product_id);
     }
 }

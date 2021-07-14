@@ -1,6 +1,7 @@
 package com.grameen.bebshanikashapp.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import com.grameen.bebshanikashapp.Model.AllCustomer.AllCustomer;
 import com.grameen.bebshanikashapp.Model.AllCustomer.Customer;
 import com.grameen.bebshanikashapp.Model.AllCustomer.Relation;
 import com.grameen.bebshanikashapp.R;
+import com.grameen.bebshanikashapp.View.Activity.UserWiseAccountingActivity;
 
 import java.util.ArrayList;
 
@@ -38,6 +40,15 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.viewHo
 
         holder.name.setText(customerInfo.getRelation().getName());
         holder.role.setText(customerInfo.getRelation().getEmail());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, UserWiseAccountingActivity.class);
+                intent.putExtra("customerInfo", customerInfo);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

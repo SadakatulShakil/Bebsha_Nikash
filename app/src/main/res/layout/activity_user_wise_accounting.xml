@@ -5,42 +5,86 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/back"
-    tools:context=".View.Activity.AccountingActivity">
+    tools:context=".View.Activity.UserWiseAccountingActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarLayLayout"
-        android:layout_width="match_parent"
-        android:background="@color/color_primary"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/backBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_arrow"/>
-
-        <TextView
-            android:id="@+id/shopName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="নগদ হিসাব"
-            android:textColor="@color/black"
-            android:fontFamily="@font/mukti"
-            android:layout_marginLeft="35dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textStyle="bold"
-            android:letterSpacing=".1" />
-
-    </androidx.appcompat.widget.Toolbar>
 
     <RelativeLayout
+        android:id="@+id/parentLay"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbarLayLayout">
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/mainLay"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/brand_tool"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/backBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_arrow"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="32dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/userName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/mukti"
+                    android:letterSpacing=".1"
+                    android:text="Shakil ajam"/>
+
+                <TextView
+                    android:id="@+id/gettingBlnc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/red"
+                    android:fontFamily="@font/mukti"
+                    android:textSize="18sp"
+                    android:letterSpacing=".1"
+                    android:text="পাবো ৳ ১০০০.০০"/>
+
+                <TextView
+                    android:id="@+id/givenBlnc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/mukti"
+                    android:letterSpacing=".1"
+                    android:textSize="18sp"
+                    android:text="দেবো ৳ ১০০০.০০"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/detailTransection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="বিস্তারিত দেখুন"
+                android:textColor="@color/black"
+                android:layout_marginRight="10dp"
+                android:drawableLeft="@drawable/details"
+                android:drawablePadding="5dp"/>
+
+        </LinearLayout>
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/mainLay">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -138,6 +182,13 @@
                         android:layout_margin="8dp"
                         android:src="@drawable/ic_add_photo"/>
 
+                    <TextView
+                        android:id="@+id/product_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:text="id"/>
+
                 </LinearLayout>
 
                 <TextView
@@ -225,6 +276,81 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:visibility="gone" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/secondLay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="@color/white">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarLayLayout"
+            android:layout_width="match_parent"
+            android:background="@color/color_primary"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/backBtn2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow"/>
+
+            <TextView
+                android:id="@+id/toolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="তালিকা সমূহ"
+                android:textColor="@color/black"
+                android:fontFamily="@font/mukti"
+                android:layout_marginLeft="35dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textStyle="bold"
+                android:letterSpacing=".1" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <EditText
+            android:id="@+id/search_eText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="খোঁজ.."
+            android:drawablePadding="8dp"
+            android:textColorHint="@color/black"
+            android:padding="12dp"
+            android:fontFamily="@font/mukti"
+            android:layout_margin="8dp"
+            android:letterSpacing=".05"
+            android:imeOptions="actionDone"
+            android:layout_below="@+id/toolbarLayLayout"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:background="@drawable/search_background"/>
+
+        <TextView
+            android:id="@+id/search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginTop="18dp"
+            android:layout_marginRight="16dp"
+            android:drawableLeft="@drawable/search"
+            android:layout_below="@+id/toolbarLayLayout"
+            android:layout_alignParentRight="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listRevView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            tools:itemCount="10"
+            android:layout_below="@+id/search"
+            tools:listitem="@layout/spinner_view" />
+
     </RelativeLayout>
 
 </RelativeLayout>

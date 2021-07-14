@@ -47,7 +47,7 @@ public class ProductListActivity extends AppCompatActivity {
     private EditText search_eText;
     private RecyclerView listRevView;
     private ProductAdapter productAdapter;
-    private String searchText, retrievedToken;
+    private String searchText, retrievedToken, from;
     private SharedPreferences preferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +64,9 @@ public class ProductListActivity extends AppCompatActivity {
             }
         });
 
+        Intent intent = getIntent();
+        from = intent.getStringExtra("from");
+        Log.d(TAG, "onCreate: " + from);
        /* search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,7 +127,7 @@ public class ProductListActivity extends AppCompatActivity {
                 }else {
                     Toast.makeText(ProductListActivity.this, "সার্ভার এ সমস্যা হয়েছে!", Toast.LENGTH_SHORT).show();
                 }
-                productAdapter = new ProductAdapter(ProductListActivity.this, productArrayList);
+                productAdapter = new ProductAdapter(ProductListActivity.this, productArrayList, from);
                 listRevView.setLayoutManager(new LinearLayoutManager(ProductListActivity.this));
                 listRevView.setAdapter(productAdapter);
                 productAdapter.notifyDataSetChanged();

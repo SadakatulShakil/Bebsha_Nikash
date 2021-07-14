@@ -10,7 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BebshaNikashApp">
-        <activity android:name=".View.Activity.PhoneBookListActivity"></activity>
+        <activity android:name=".View.Activity.UserWiseAccountingActivity"></activity>
+        <activity android:name=".View.Activity.ProductDetailsActivity" />
+        <activity android:name=".View.Activity.PhoneBookListActivity" />
         <activity android:name=".View.Activity.UpdateProfileActivity" />
         <activity android:name=".View.Activity.ProfileActivity" />
         <activity android:name=".View.Activity.UpdateProductActivity" />
@@ -21,7 +23,9 @@
         <activity android:name=".View.Activity.ProductUploadActivity" />
         <activity android:name=".View.Activity.RegistrationActivity" />
         <activity android:name=".View.Activity.AddCustomerActivity" />
-        <activity android:name=".View.Activity.FragmentContainerActivity" />
+        <activity
+            android:name=".View.Activity.FragmentContainerActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".View.Activity.SplashActivity" />
         <activity android:name=".View.Activity.MainActivity">
             <intent-filter>

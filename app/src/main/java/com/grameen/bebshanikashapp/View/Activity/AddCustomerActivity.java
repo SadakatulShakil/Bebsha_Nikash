@@ -173,6 +173,7 @@ public class AddCustomerActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         Retrofit retrofit = RetrofitClient.getRetrofitClient1();
         ApiInterface api = retrofit.create(ApiInterface.class);
+
         Log.d(TAG, "setCustomerAdd: " +uName+"........."+ uNumber+"........." +uRole+"........."+ uPassword);
         Call<AddCustomer> addCustomerCall = api.postByAddCustomer("Bearer "+retrievedToken, uName, uNumber, uRole, uPassword);
 
